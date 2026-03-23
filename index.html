@@ -3,733 +3,363 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ярослав — Python-разработчик | Telegram-боты, парсинг, автоматизация</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
+<title>Ярослав | Python-разработчик</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --border: #1e1e2e;
-    --accent: #00ff88;
-    --accent2: #0088ff;
-    --text: #e8e8f0;
-    --muted: #666680;
-    --card: #13131f;
+    --bg: #ffffff;
+    --surface: #f9fafb;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #2563eb;
   }
 
-  html { scroll-behavior: smooth; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     background: var(--bg);
-    color: var(--text);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    line-height: 1.7;
-    overflow-x: hidden;
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* Grid background */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
+  a { color: inherit; text-decoration: none; }
+  
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
   }
 
-  /* Glow orbs */
-  .orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(120px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .orb-1 {
-    width: 500px; height: 500px;
-    background: rgba(0,255,136,0.06);
-    top: -100px; left: -100px;
-  }
-  .orb-2 {
-    width: 400px; height: 400px;
-    background: rgba(0,136,255,0.06);
-    bottom: 100px; right: -100px;
-  }
-
-  main { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 24px; }
-
-  /* ── HERO ── */
-  .hero {
+  /* ── HEADER & HERO ── */
+  header {
     padding: 100px 0 80px;
     border-bottom: 1px solid var(--border);
   }
 
-  .badge {
+  .status-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(0,255,136,0.08);
-    border: 1px solid rgba(0,255,136,0.2);
-    color: var(--accent);
-    padding: 4px 12px;
-    border-radius: 4px;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
     margin-bottom: 32px;
-    animation: fadeDown 0.6s ease both;
   }
 
-  .badge::before {
+  .status-badge::before {
     content: '';
-    width: 6px; height: 6px;
-    background: var(--accent);
+    width: 8px; height: 8px;
+    background: #10b981;
     border-radius: 50%;
-    animation: pulse 2s infinite;
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
-  .hero h1 {
-    font-family: 'Unbounded', sans-serif;
-    font-size: clamp(32px, 6vw, 58px);
-    font-weight: 900;
+  h1 {
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 800;
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     margin-bottom: 24px;
-    animation: fadeDown 0.6s 0.1s ease both;
+    max-width: 800px;
   }
 
-  .hero h1 span {
-    color: var(--accent);
-    position: relative;
-  }
-
-  .hero h1 span::after {
-    content: '';
-    position: absolute;
-    bottom: 2px; left: 0; right: 0;
-    height: 3px;
-    background: var(--accent);
-    opacity: 0.3;
-  }
-
-  .hero-sub {
-    font-size: 16px;
-    color: var(--muted);
-    max-width: 520px;
+  .hero-desc {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 600px;
     margin-bottom: 40px;
-    line-height: 1.8;
-    animation: fadeDown 0.6s 0.2s ease both;
   }
 
-  .hero-sub strong { color: var(--text); }
-
-  .tags {
+  .tech-stack {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 40px;
-    animation: fadeDown 0.6s 0.3s ease both;
+    margin-bottom: 48px;
   }
 
-  .tag {
-    background: var(--card);
+  .tech-tag {
+    padding: 6px 12px;
+    background: var(--surface);
     border: 1px solid var(--border);
-    color: var(--muted);
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    transition: all 0.2s;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-main);
   }
 
-  .tag:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .cta-row {
+  .actions {
     display: flex;
-    gap: 12px;
+    gap: 16px;
     flex-wrap: wrap;
-    animation: fadeDown 0.6s 0.4s ease both;
   }
 
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
+    justify-content: center;
+    padding: 14px 28px;
+    font-size: 15px;
+    font-weight: 600;
     transition: all 0.2s;
     cursor: pointer;
-    border: none;
   }
 
   .btn-primary {
-    background: var(--accent);
-    color: #000;
+    background: var(--text-main);
+    color: #fff;
   }
 
   .btn-primary:hover {
-    background: #00ffaa;
+    background: #000;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,255,136,0.3);
   }
 
-  .btn-secondary {
+  .btn-outline {
     background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
+    color: var(--text-main);
+    border: 1px solid var(--text-main);
   }
 
-  .btn-secondary:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+  .btn-outline:hover {
+    background: var(--surface);
     transform: translateY(-2px);
   }
 
   /* ── SECTIONS ── */
-  section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+  section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    margin-bottom: 48px;
+  }
 
   .section-label {
-    font-size: 11px;
-    letter-spacing: 0.15em;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-
-  .section-title {
-    font-family: 'Unbounded', sans-serif;
-    font-size: clamp(22px, 4vw, 32px);
-    font-weight: 700;
-    margin-bottom: 40px;
-    line-height: 1.2;
-  }
-
-  /* ── PROJECTS ── */
-  .projects { display: grid; gap: 16px; }
-
-  .project-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 28px;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .project-card:hover {
-    border-color: rgba(0,255,136,0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-  }
-
-  .project-card:hover::before { opacity: 1; }
-
-  .project-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
+    letter-spacing: 0.05em;
     margin-bottom: 12px;
   }
 
-  .project-icon {
-    font-size: 28px;
-    flex-shrink: 0;
+  h2 {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
 
-  .project-name {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 4px;
+  /* ── GRID LAYOUTS ── */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 32px;
   }
 
-  .project-status {
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 3px;
-    white-space: nowrap;
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
   }
 
-  .status-live {
-    background: rgba(0,255,136,0.1);
-    color: var(--accent);
-    border: 1px solid rgba(0,255,136,0.2);
-  }
-
-  .status-done {
-    background: rgba(0,136,255,0.1);
-    color: var(--accent2);
-    border: 1px solid rgba(0,136,255,0.2);
-  }
-
-  .project-desc {
-    color: var(--muted);
-    font-size: 13px;
-    margin-bottom: 16px;
-    line-height: 1.8;
-  }
-
-  .project-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .tech-tag {
-    background: rgba(255,255,255,0.04);
+  /* ── CARDS ── */
+  .card {
+    padding: 32px;
     border: 1px solid var(--border);
-    color: var(--muted);
-    padding: 2px 8px;
-    border-radius: 3px;
-    font-size: 11px;
+    background: var(--bg);
+    transition: border-color 0.2s;
   }
 
-  .project-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--accent);
-    text-decoration: none;
+  .card:hover {
+    border-color: var(--text-main);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .card-badge {
     font-size: 12px;
-    margin-top: 16px;
-    opacity: 0.8;
-    transition: opacity 0.2s;
+    font-weight: 500;
+    padding: 4px 8px;
+    background: var(--surface);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
   }
 
-  .project-link:hover { opacity: 1; }
+  .card-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .card-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .card-link:hover { text-decoration: underline; }
 
   /* ── SERVICES ── */
-  .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-
-  .service-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 24px;
-    transition: all 0.3s;
-  }
-
-  .service-card:hover {
-    border-color: rgba(0,255,136,0.2);
-    transform: translateY(-2px);
-  }
-
-  .service-price {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-
-  .service-name {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-
-  .service-desc {
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.7;
-  }
-
-  /* ── STATS ── */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 16px;
-    margin-bottom: 0;
-  }
-
-  .stat-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 24px;
-    text-align: center;
-  }
-
-  .stat-num {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 32px;
-    font-weight: 900;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  .stat-label {
-    color: var(--muted);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  /* ── CONTACT ── */
-  .contact-block {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 40px;
-    text-align: center;
-  }
-
-  .contact-block h3 {
-    font-family: 'Unbounded', sans-serif;
+  .price {
     font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-
-  .contact-block p {
-    color: var(--muted);
-    margin-bottom: 28px;
-    font-size: 13px;
-  }
-
-  .contact-links {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
+    font-weight: 800;
+    margin-bottom: 8px;
   }
 
   /* ── FOOTER ── */
   footer {
-    padding: 32px 0;
-    color: var(--muted);
-    font-size: 11px;
+    padding: 40px 0;
+    font-size: 14px;
+    color: var(--text-muted);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
   }
-
-  .footer-accent { color: var(--accent); }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ── TERMINAL ── */
-  .terminal {
-    background: #0d0d14;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px 24px;
-    margin-bottom: 40px;
-    font-size: 13px;
-    animation: fadeDown 0.6s 0.15s ease both;
-  }
-
-  .terminal-line { margin: 2px 0; }
-  .t-prompt { color: var(--accent); }
-  .t-cmd { color: var(--text); }
-  .t-out { color: var(--muted); }
-  .t-val { color: var(--accent2); }
 
   @media (max-width: 600px) {
-    .hero { padding: 60px 0 50px; }
-    section { padding: 50px 0; }
-    .contact-block { padding: 28px 20px; }
+    header { padding: 60px 0; }
+    h1 { font-size: 32px; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .card { padding: 24px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
   }
 </style>
 </head>
 <body>
 
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
-
-<main>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="badge">Доступен для новых проектов</div>
-
-    <h1>Python-разработчик.<br><span>Боты. Парсинг.</span><br>Автоматизация.</h1>
-
-    <div class="terminal">
-      <div class="terminal-line"><span class="t-prompt">$ </span><span class="t-cmd">whoami</span></div>
-      <div class="terminal-line"><span class="t-out">→ </span><span class="t-val">Ярослав</span><span class="t-out">, Новосибирск</span></div>
-      <div class="terminal-line" style="margin-top:8px"><span class="t-prompt">$ </span><span class="t-cmd">cat skills.txt</span></div>
-      <div class="terminal-line"><span class="t-out">→ Python · aiogram · Telethon · FastAPI · Docker · PostgreSQL · CI/CD</span></div>
-      <div class="terminal-line" style="margin-top:8px"><span class="t-prompt">$ </span><span class="t-cmd">cat status.txt</span></div>
-      <div class="terminal-line"><span class="t-out">→ </span><span class="t-val">Беру проекты</span><span class="t-out"> · самозанятый · быстрый старт</span></div>
+<div class="container">
+  
+  <header>
+    <div class="status-badge">Доступен для новых проектов</div>
+    <h1>Ярослав. Python-разработчик. Парсинг и автоматизация.</h1>
+    <p class="hero-desc">Разрабатываю надежных чат-ботов для мессенджеров и соцсетей, собираю данные любой сложности и настраиваю автоматизацию процессов. Сдаю проекты под ключ, гарантирую стабильную работу и поддерживаю после запуска.</p>
+    
+    <div class="tech-stack">
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">Bot Frameworks</span>
+      <span class="tech-tag">FastAPI</span>
+      <span class="tech-tag">PostgreSQL</span>
+      <span class="tech-tag">Docker</span>
+      <span class="tech-tag">CI/CD</span>
     </div>
 
-    <p class="hero-sub">
-      Делаю <strong>Telegram-боты для бизнеса</strong>, парсеры и автоматизацию.
-      Не теоретик — у меня работают реальные продукты в продакшне.
-      Беру задачи, в которых уверен, и довожу до результата.
-    </p>
-
-    <div class="tags">
-      <span class="tag">Python</span>
-      <span class="tag">aiogram v3</span>
-      <span class="tag">Telethon</span>
-      <span class="tag">FastAPI</span>
-      <span class="tag">Docker</span>
-      <span class="tag">PostgreSQL</span>
-      <span class="tag">GitHub Actions</span>
-      <span class="tag">Redis</span>
-      <span class="tag">Парсинг</span>
-      <span class="tag">CI/CD</span>
+    <div class="actions">
+      <a href="https://t.me/lMeXaNl" class="btn btn-primary" target="_blank">Обсудить проект</a>
+      <a href="https://kwork.ru/user/lmexanl" class="btn btn-outline" target="_blank">Kwork</a>
+      <a href="#" class="btn btn-outline" target="_blank">Авито</a>
     </div>
+  </header>
 
-    <div class="cta-row">
-      <a href="https://t.me/lMeXaNl" class="btn btn-primary" target="_blank">
-        ✈ Написать в Telegram
-      </a>
-      <a href="https://kwork.ru" class="btn btn-secondary" target="_blank">
-        → Заказать на Kwork
-      </a>
+  <section>
+    <div class="section-header">
+      <div class="section-label">Портфолио</div>
+      <h2>Реализованные проекты</h2>
     </div>
-  </section>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Nova Flow — Конфиденциальность в сети</div>
+          <div class="card-badge">Live</div>
+        </div>
+        <p class="card-desc">Автономный сервис для обеспечения конфиденциальности в интернете с автоматизированным управлением подписками через чат-бота. Интеграция оплат (ЮKassa), мониторинг инфраструктуры (Prometheus/Grafana), современные протоколы маршрутизации.</p>
+        <a href="https://t.me/nova_flow_bot" class="card-link" target="_blank">Смотреть проект →</a>
+      </div>
 
-  <!-- STATS -->
-  <section class="reveal">
-    <p class="section-label">Цифры</p>
-    <h2 class="section-title">В продакшне, не в резюме</h2>
-    <div class="stats">
-      <div class="stat-card">
-        <span class="stat-num">3000+</span>
-        <span class="stat-label">постов опубликовано ботом</span>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Fun3h — Агрегатор контента</div>
+          <div class="card-badge">Live</div>
+        </div>
+        <p class="card-desc">Парсинг контента из популярных социальных сетей и RSS. Прохождение модерации, AI-генерация изображений и автоматическая публикация по расписанию. Более 3000 опубликованных постов без сбоев.</p>
+        <a href="https://t.me/Fun3h" class="card-link" target="_blank">Смотреть проект →</a>
       </div>
-      <div class="stat-card">
-        <span class="stat-num">3</span>
-        <span class="stat-label">живых подписчика VPN</span>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Парсер бизнес-каталогов</div>
+          <div class="card-badge">B2B</div>
+        </div>
+        <p class="card-desc">Масштабный сбор данных о бизнесах из открытых источников (названия, телефоны, адреса). Обработка через pandas и выгрузка чистых баз для холодных продаж.</p>
       </div>
-      <div class="stat-card">
-        <span class="stat-num">24ч</span>
-        <span class="stat-label">типичный срок парсера</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-num">5+</span>
-        <span class="stat-label">реальных проектов</span>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Боты-воронки для бизнеса</div>
+          <div class="card-badge">B2B</div>
+        </div>
+        <p class="card-desc">Разработка серии чат-ботов для мессенджеров для сбора клиентских заявок. Интеграция с таблицами, настройка многошаговых сценариев и автоматических уведомлений менеджерам.</p>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section class="reveal">
-    <p class="section-label">Портфолио</p>
-    <h2 class="section-title">Что уже сделано</h2>
-    <div class="projects">
-
-      <div class="project-card">
-        <div class="project-header">
-          <div>
-            <div class="project-icon">🔐</div>
-            <div class="project-name">Nova Flow VPN</div>
-          </div>
-          <span class="project-status status-live">● Live</span>
-        </div>
-        <p class="project-desc">
-          Полноценный VPN-сервис с Telegram-ботом для управления подписками.
-          Автоматическая оплата через ЮKassa, управление доступом, мониторинг через Grafana.
-          Работает автономно без ручного вмешательства.
-        </p>
-        <div class="project-tech">
-          <span class="tech-tag">FastAPI</span>
-          <span class="tech-tag">aiogram</span>
-          <span class="tech-tag">PostgreSQL</span>
-          <span class="tech-tag">Docker</span>
-          <span class="tech-tag">Xray/VLESS</span>
-          <span class="tech-tag">Redis</span>
-          <span class="tech-tag">Prometheus</span>
-          <span class="tech-tag">ЮKassa</span>
-          <span class="tech-tag">GitHub Actions</span>
-        </div>
-        <a href="https://t.me/nova_flow_bot" class="project-link" target="_blank">
-          → @nova_flow_bot
-        </a>
-      </div>
-
-      <div class="project-card">
-        <div class="project-header">
-          <div>
-            <div class="project-icon">😄</div>
-            <div class="project-name">Fun3h — бот агрегации контента</div>
-          </div>
-          <span class="project-status status-live">● Live</span>
-        </div>
-        <p class="project-desc">
-          Telegram-бот, который парсит юмор-контент из Telegram-каналов, VK и RSS,
-          проходит модерацию и публикует по расписанию. AI-генерация картинок.
-          Опубликовано 3000+ постов, работает без сбоев.
-        </p>
-        <div class="project-tech">
-          <span class="tech-tag">aiogram</span>
-          <span class="tech-tag">Telethon</span>
-          <span class="tech-tag">VK API</span>
-          <span class="tech-tag">RSS</span>
-          <span class="tech-tag">AI-генерация</span>
-          <span class="tech-tag">Docker</span>
-          <span class="tech-tag">CI/CD</span>
-        </div>
-        <a href="https://t.me/Fun3h" class="project-link" target="_blank">
-          → Telegram-канал Fun3h
-        </a>
-      </div>
-
-      <div class="project-card">
-        <div class="project-header">
-          <div>
-            <div class="project-icon">🗂️</div>
-            <div class="project-name">Парсер бизнес-каталогов</div>
-          </div>
-          <span class="project-status status-done">✓ Сделано</span>
-        </div>
-        <p class="project-desc">
-          Сбор данных о бизнесах из открытых каталогов: названия, телефоны, адреса, рубрики.
-          Выгрузка в Excel/CSV. Использую для холодных продаж и под заказ.
-        </p>
-        <div class="project-tech">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">requests</span>
-          <span class="tech-tag">pandas</span>
-          <span class="tech-tag">Excel/CSV</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-header">
-          <div>
-            <div class="project-icon">📬</div>
-            <div class="project-name">Бот сбора заявок + автопостинг</div>
-          </div>
-          <span class="project-status status-done">✓ Клиент</span>
-        </div>
-        <p class="project-desc">
-          Telegram-боты для клиентов: сбор заявок по шагам с уведомлениями,
-          бот автопостинга для канала под ключ. Типовые задачи — делаю быстро и надёжно.
-        </p>
-        <div class="project-tech">
-          <span class="tech-tag">aiogram v3</span>
-          <span class="tech-tag">SQLite</span>
-          <span class="tech-tag">Google Sheets</span>
-          <span class="tech-tag">Python</span>
-        </div>
-      </div>
-
+  <section>
+    <div class="section-header">
+      <div class="section-label">Research & Development</div>
+      <h2>Сложные инженерные задачи</h2>
     </div>
-  </section>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">3D-конфигуратор металлоконструкций</div>
+          <div class="card-badge">В разработке</div>
+        </div>
+        <p class="card-desc">Проектирование логики масштабируемого конфигуратора. Разработка калькулятора расчетов и автоматизированной генерации архитектурных чертежей (КМ/КМД) под параметры заказчика.</p>
+      </div>
 
-  <!-- SERVICES -->
-  <section class="reveal">
-    <p class="section-label">Услуги</p>
-    <h2 class="section-title">Что беру в работу</h2>
-    <div class="services">
-      <div class="service-card">
-        <div class="service-price">от 4 800 ₽</div>
-        <div class="service-name">Telegram-бот для заявок</div>
-        <p class="service-desc">Клиент пишет — вы получаете готовую заявку мгновенно. Запись, уведомления, Google Sheets.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-price">от 4 000 ₽</div>
-        <div class="service-name">Бот автопостинга</div>
-        <p class="service-desc">Канал работает сам по расписанию. Очередь постов, медиа, парсинг источников.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-price">от 3 600 ₽</div>
-        <div class="service-name">Парсер данных</div>
-        <p class="service-desc">Соберу базу клиентов, товаров, контактов из сайтов и каталогов за 24 часа.</p>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Защита API-ключей на GitHub</div>
+          <div class="card-badge">Open Source / R&D</div>
+        </div>
+        <p class="card-desc">Создание инструмента для мониторинга утечек чувствительных данных в открытых репозиториях. Автоматическое сканирование кода, оповещение разработчиков и формирование комьюнити по безопасности.</p>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section class="reveal">
-    <div class="contact-block">
-      <h3>Обсудим вашу задачу?</h3>
-      <p>Отвечаю в течение часа. Если задача подходит — скажу честно и назову реальные сроки.</p>
-      <div class="contact-links">
-        <a href="https://t.me/lMeXaNl" class="btn btn-primary" target="_blank">
-          ✈ Telegram
-        </a>
-        <a href="https://kwork.ru" class="btn btn-secondary" target="_blank">
-          → Kwork
-        </a>
+  <section>
+    <div class="section-header">
+      <div class="section-label">Услуги</div>
+      <h2>Форматы сотрудничества</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="price">от 8 000 ₽</div>
+        <div class="card-title" style="margin-bottom: 12px; font-size: 16px;">Чат-бот для сбора заявок</div>
+        <p class="card-desc" style="margin-bottom: 0;">Клиент пишет — вы получаете заявку. Запись в БД, уведомления, интеграция с внутренними системами.</p>
+      </div>
+      <div class="card">
+        <div class="price">от 6 000 ₽</div>
+        <div class="card-title" style="margin-bottom: 12px; font-size: 16px;">Автопостинг и парсинг</div>
+        <p class="card-desc" style="margin-bottom: 0;">Сообщества работают сами по расписанию. Сбор данных из источников, форматирование и публикация.</p>
+      </div>
+      <div class="card">
+        <div class="price">от 5 000 ₽</div>
+        <div class="card-title" style="margin-bottom: 12px; font-size: 16px;">Сбор данных (Web Scraping)</div>
+        <p class="card-desc" style="margin-bottom: 0;">Соберу базу товаров, контактов или компаний из любых открытых каталогов и сайтов.</p>
       </div>
     </div>
   </section>
 
   <footer>
-    <span>Ярослав · Python-разработчик · Новосибирск</span>
-    <span>Самозанятый · <span class="footer-accent">Беру проекты</span></span>
+    <div>Ярослав · Python-разработчик · Новосибирск</div>
+    <div>Самозанятый</div>
   </footer>
 
-</main>
+</div>
 
-<script>
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
-
-  // Typing cursor in terminal
-  const lastLine = document.querySelector('.terminal .terminal-line:last-child .t-out');
-  if (lastLine) {
-    const text = lastLine.textContent;
-    lastLine.textContent = '';
-    let i = 0;
-    setTimeout(() => {
-      const interval = setInterval(() => {
-        lastLine.textContent = text.slice(0, ++i);
-        if (i >= text.length) clearInterval(interval);
-      }, 30);
-    }, 800);
-  }
-</script>
 </body>
 </html>
