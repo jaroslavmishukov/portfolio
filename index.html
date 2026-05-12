@@ -3,16 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ярослав | Python-разработчик</title>
+<title>Ярослав | Python-разработчик бизнес-систем</title>
+<meta name="description" content="Python-разработчик: бизнес-системы, бронирование, оплаты, админ-панели, Telegram-уведомления, парсинг, автоматизация и деплой на VPS.">
+<meta property="og:title" content="Ярослав | Python-разработчик бизнес-систем">
+<meta property="og:description" content="Разрабатываю сайты с админками, системы бронирования, интеграции оплат, Telegram-уведомления, парсинг и автоматизацию бизнес-процессов.">
+<meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #ffffff;
     --surface: #f9fafb;
+    --surface-strong: #f3f4f6;
     --text-main: #111827;
     --text-muted: #6b7280;
     --border: #e5e7eb;
     --accent: #2563eb;
+    --success: #10b981;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,16 +33,15 @@
   }
 
   a { color: inherit; text-decoration: none; }
-  
+
   .container {
-    max-width: 900px;
+    max-width: 960px;
     margin: 0 auto;
     padding: 0 24px;
   }
 
-  /* ── HEADER & HERO ── */
   header {
-    padding: 100px 0 80px;
+    padding: 96px 0 72px;
     border-bottom: 1px solid var(--border);
   }
 
@@ -52,24 +57,25 @@
 
   .status-badge::before {
     content: '';
-    width: 8px; height: 8px;
-    background: #10b981;
+    width: 8px;
+    height: 8px;
+    background: var(--success);
     border-radius: 50%;
   }
 
   h1 {
-    font-size: clamp(36px, 6vw, 56px);
+    font-size: clamp(34px, 6vw, 56px);
     font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
     margin-bottom: 24px;
-    max-width: 800px;
+    max-width: 860px;
   }
 
   .hero-desc {
     font-size: 18px;
     color: var(--text-muted);
-    max-width: 600px;
+    max-width: 720px;
     margin-bottom: 40px;
   }
 
@@ -127,7 +133,6 @@
     transform: translateY(-2px);
   }
 
-  /* ── SECTIONS ── */
   section {
     padding: 80px 0;
     border-bottom: 1px solid var(--border);
@@ -149,13 +154,12 @@
   h2 {
     font-size: 32px;
     font-weight: 800;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
 
-  /* ── GRID LAYOUTS ── */
   .grid-2 {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 32px;
   }
 
@@ -165,7 +169,6 @@
     gap: 24px;
   }
 
-  /* ── CARDS ── */
   .card {
     padding: 32px;
     border: 1px solid var(--border);
@@ -173,14 +176,18 @@
     transition: border-color 0.2s;
   }
 
-  .card:hover {
-    border-color: var(--text-main);
+  .card:hover { border-color: var(--text-main); }
+
+  .card-featured {
+    grid-column: 1 / -1;
+    background: var(--surface);
   }
 
   .card-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 16px;
     margin-bottom: 16px;
   }
 
@@ -190,10 +197,11 @@
   }
 
   .card-badge {
+    flex: 0 0 auto;
     font-size: 12px;
     font-weight: 500;
     padding: 4px 8px;
-    background: var(--surface);
+    background: #fff;
     color: var(--text-muted);
     border: 1px solid var(--border);
   }
@@ -205,6 +213,21 @@
     line-height: 1.6;
   }
 
+  .case-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .case-point {
+    padding: 14px 16px;
+    background: #fff;
+    border: 1px solid var(--border);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
   .card-link {
     font-size: 14px;
     font-weight: 600;
@@ -213,14 +236,12 @@
 
   .card-link:hover { text-decoration: underline; }
 
-  /* ── SERVICES ── */
   .price {
     font-size: 24px;
     font-weight: 800;
     margin-bottom: 8px;
   }
 
-  /* ── FOOTER ── */
   footer {
     padding: 40px 0;
     font-size: 14px;
@@ -233,8 +254,10 @@
   @media (max-width: 600px) {
     header { padding: 60px 0; }
     h1 { font-size: 32px; }
+    h2 { font-size: 28px; }
     .grid-2, .grid-3 { grid-template-columns: 1fr; }
     .card { padding: 24px; }
+    .card-header { flex-direction: column; }
     footer { flex-direction: column; gap: 16px; text-align: center; }
   }
 </style>
@@ -242,25 +265,28 @@
 <body>
 
 <div class="container">
-  
   <header>
     <div class="status-badge">Доступен для новых проектов</div>
-    <h1>Ярослав. Python-разработчик. Парсинг и автоматизация.</h1>
-    <p class="hero-desc">Разрабатываю надежных чат-ботов для мессенджеров и соцсетей, собираю данные любой сложности и настраиваю автоматизацию процессов. Сдаю проекты под ключ, гарантирую стабильную работу и поддерживаю после запуска.</p>
-    
+    <h1>Ярослав. Python-разработчик бизнес-систем, автоматизации и интеграций.</h1>
+    <p class="hero-desc">Разрабатываю сайты с админками, системы бронирования, Telegram-ботов, парсеры и внутренние инструменты для бизнеса. Беру задачу от логики и базы данных до оплаты, уведомлений, деплоя на VPS и поддержки после запуска.</p>
+
     <div class="tech-stack">
       <span class="tech-tag">Python</span>
-      <span class="tech-tag">Bot Frameworks</span>
       <span class="tech-tag">FastAPI</span>
       <span class="tech-tag">PostgreSQL</span>
+      <span class="tech-tag">SQLAlchemy</span>
+      <span class="tech-tag">Alembic</span>
+      <span class="tech-tag">Jinja2</span>
       <span class="tech-tag">Docker</span>
-      <span class="tech-tag">CI/CD</span>
+      <span class="tech-tag">nginx</span>
+      <span class="tech-tag">ЮKassa</span>
+      <span class="tech-tag">Telegram Bot API</span>
+      <span class="tech-tag">pytest</span>
     </div>
 
     <div class="actions">
-      <a href="https://t.me/lMeXaNl" class="btn btn-primary" target="_blank">Обсудить проект</a>
-      <a href="https://kwork.ru/user/lmexanl" class="btn btn-outline" target="_blank">Kwork</a>
-      <a href="#" class="btn btn-outline" target="_blank">Авито</a>
+      <a href="https://t.me/lMeXaNl" class="btn btn-primary" target="_blank" rel="noopener">Обсудить проект</a>
+      <a href="https://kwork.ru/user/lmexanl" class="btn btn-outline" target="_blank" rel="noopener">Kwork</a>
     </div>
   </header>
 
@@ -270,22 +296,38 @@
       <h2>Реализованные проекты</h2>
     </div>
     <div class="grid-2">
-      <div class="card">
+      <div class="card card-featured">
         <div class="card-header">
-          <div class="card-title">Nova Flow — Конфиденциальность в сети</div>
-          <div class="card-badge">Live</div>
+          <div class="card-title">Озеро Гармония Чудес — система бронирования для базы отдыха</div>
+          <div class="card-badge">Production-ready</div>
         </div>
-        <p class="card-desc">Автономный сервис для обеспечения конфиденциальности в интернете с автоматизированным управлением подписками через чат-бота. Интеграция оплат (ЮKassa), мониторинг инфраструктуры (Prometheus/Grafana), современные протоколы маршрутизации.</p>
-        <a href="https://t.me/nova_flow_bot" class="card-link" target="_blank">Смотреть проект →</a>
+        <p class="card-desc">Разработал сайт-витрину и административную систему для бронирования беседок и бань. В проекте есть онлайн-заявки, календарь занятости, ручные брони, роли сотрудников, оплата через ЮKassa, Telegram-уведомления, QR-проверка посещений, финансовые отчеты, юридические согласия и production-деплой через Docker, PostgreSQL, nginx и HTTPS.</p>
+        <div class="case-points">
+          <div class="case-point">FastAPI + async SQLAlchemy + PostgreSQL</div>
+          <div class="case-point">Админка, owner-панель и superadmin</div>
+          <div class="case-point">ЮKassa: платежи, sandbox/production, возвраты</div>
+          <div class="case-point">Docker Compose, nginx, Let's Encrypt, backup/restore</div>
+          <div class="case-point">Telegram-уведомления с быстрыми действиями</div>
+          <div class="case-point">pytest-тесты бизнес-логики и деплоя</div>
+        </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <div class="card-title">Fun3h — Агрегатор контента</div>
+          <div class="card-title">Nova Flow — сервис подписок через чат-бота</div>
           <div class="card-badge">Live</div>
         </div>
-        <p class="card-desc">Парсинг контента из популярных социальных сетей и RSS. Прохождение модерации, AI-генерация изображений и автоматическая публикация по расписанию. Более 3000 опубликованных постов без сбоев.</p>
-        <a href="https://t.me/Fun3h" class="card-link" target="_blank">Смотреть проект →</a>
+        <p class="card-desc">Автономный сервис для управления доступом и подписками через чат-бота. Реализована интеграция оплат, автоматизация пользовательских сценариев и администрирование сервиса.</p>
+        <a href="https://t.me/nova_flow_bot" class="card-link" target="_blank" rel="noopener">Смотреть проект →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Fun3h — агрегатор и автопостинг контента</div>
+          <div class="card-badge">Live</div>
+        </div>
+        <p class="card-desc">Парсинг контента из социальных сетей и RSS, подготовка публикаций, AI-генерация изображений и автоматическая публикация по расписанию. Более 3000 опубликованных постов без ручного управления.</p>
+        <a href="https://t.me/Fun3h" class="card-link" target="_blank" rel="noopener">Смотреть проект →</a>
       </div>
 
       <div class="card">
@@ -293,7 +335,7 @@
           <div class="card-title">Парсер бизнес-каталогов</div>
           <div class="card-badge">B2B</div>
         </div>
-        <p class="card-desc">Масштабный сбор данных о бизнесах из открытых источников (названия, телефоны, адреса). Обработка через pandas и выгрузка чистых баз для холодных продаж.</p>
+        <p class="card-desc">Масштабный сбор данных о компаниях из открытых источников: названия, телефоны, адреса, категории. Очистка, нормализация и выгрузка данных для продаж и аналитики.</p>
       </div>
 
       <div class="card">
@@ -301,7 +343,46 @@
           <div class="card-title">Боты-воронки для бизнеса</div>
           <div class="card-badge">B2B</div>
         </div>
-        <p class="card-desc">Разработка серии чат-ботов для мессенджеров для сбора клиентских заявок. Интеграция с таблицами, настройка многошаговых сценариев и автоматических уведомлений менеджерам.</p>
+        <p class="card-desc">Чат-боты для сбора заявок, записи клиентов, уведомлений менеджеров и интеграции с таблицами, CRM или внутренними системами. Настройка сценариев, базы данных и отчетности.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-label">Что делаю</div>
+      <h2>Форматы сотрудничества</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="price">от 25 000 ₽</div>
+        <div class="card-title" style="margin-bottom: 12px; font-size: 16px;">Система бронирования или записи</div>
+        <p class="card-desc" style="margin-bottom: 0;">Сайт, календарь, база данных, админка, статусы заявок, уведомления, оплата и отчеты для владельца.</p>
+      </div>
+      <div class="card">
+        <div class="price">от 15 000 ₽</div>
+        <div class="card-title" style="margin-bottom: 12px; font-size: 16px;">Telegram-бот или внутренняя автоматизация</div>
+        <p class="card-desc" style="margin-bottom: 0;">Сбор заявок, сценарии, личные кабинеты, уведомления, интеграции с таблицами, API, CRM и платежами.</p>
+      </div>
+      <div class="card">
+        <div class="price">от 10 000 ₽</div>
+        <div class="card-title" style="margin-bottom: 12px; font-size: 16px;">Парсинг и обработка данных</div>
+        <p class="card-desc" style="margin-bottom: 0;">Сбор товаров, контактов, цен или публикаций из открытых источников. Очистка, дедупликация и выгрузка в удобном формате.</p>
+      </div>
+      <div class="card">
+        <div class="price">от 12 000 ₽</div>
+        <div class="card-title" style="margin-bottom: 12px; font-size: 16px;">Деплой и поддержка на VPS</div>
+        <p class="card-desc" style="margin-bottom: 0;">Docker, PostgreSQL, nginx, HTTPS, healthcheck, логи, резервные копии и инструкция по эксплуатации.</p>
+      </div>
+      <div class="card">
+        <div class="price">от 8 000 ₽</div>
+        <div class="card-title" style="margin-bottom: 12px; font-size: 16px;">Интеграция оплат</div>
+        <p class="card-desc" style="margin-bottom: 0;">Подключение ЮKassa, статусы платежей, webhooks, возвраты, разделение тестового и боевого режимов.</p>
+      </div>
+      <div class="card">
+        <div class="price">по задаче</div>
+        <div class="card-title" style="margin-bottom: 12px; font-size: 16px;">Доработка существующих проектов</div>
+        <p class="card-desc" style="margin-bottom: 0;">Разбор кода, исправление ошибок, добавление функций, тесты, оптимизация и подготовка проекта к запуску.</p>
       </div>
     </div>
   </section>
@@ -317,7 +398,7 @@
           <div class="card-title">3D-конфигуратор металлоконструкций</div>
           <div class="card-badge">В разработке</div>
         </div>
-        <p class="card-desc">Проектирование логики масштабируемого конфигуратора. Разработка калькулятора расчетов и автоматизированной генерации архитектурных чертежей (КМ/КМД) под параметры заказчика.</p>
+        <p class="card-desc">Проектирование логики масштабируемого конфигуратора, калькулятора расчетов и автоматизированной генерации архитектурных чертежей под параметры заказчика.</p>
       </div>
 
       <div class="card">
@@ -325,31 +406,7 @@
           <div class="card-title">Защита API-ключей на GitHub</div>
           <div class="card-badge">Open Source / R&D</div>
         </div>
-        <p class="card-desc">Создание инструмента для мониторинга утечек чувствительных данных в открытых репозиториях. Автоматическое сканирование кода, оповещение разработчиков и формирование комьюнити по безопасности.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-header">
-      <div class="section-label">Услуги</div>
-      <h2>Форматы сотрудничества</h2>
-    </div>
-    <div class="grid-3">
-      <div class="card">
-        <div class="price">от 8 000 ₽</div>
-        <div class="card-title" style="margin-bottom: 12px; font-size: 16px;">Чат-бот для сбора заявок</div>
-        <p class="card-desc" style="margin-bottom: 0;">Клиент пишет — вы получаете заявку. Запись в БД, уведомления, интеграция с внутренними системами.</p>
-      </div>
-      <div class="card">
-        <div class="price">от 6 000 ₽</div>
-        <div class="card-title" style="margin-bottom: 12px; font-size: 16px;">Автопостинг и парсинг</div>
-        <p class="card-desc" style="margin-bottom: 0;">Сообщества работают сами по расписанию. Сбор данных из источников, форматирование и публикация.</p>
-      </div>
-      <div class="card">
-        <div class="price">от 5 000 ₽</div>
-        <div class="card-title" style="margin-bottom: 12px; font-size: 16px;">Сбор данных (Web Scraping)</div>
-        <p class="card-desc" style="margin-bottom: 0;">Соберу базу товаров, контактов или компаний из любых открытых каталогов и сайтов.</p>
+        <p class="card-desc">Инструмент для мониторинга утечек чувствительных данных в открытых репозиториях: автоматическое сканирование кода, уведомления разработчиков и работа с безопасностью.</p>
       </div>
     </div>
   </section>
@@ -358,7 +415,6 @@
     <div>Ярослав · Python-разработчик · Новосибирск</div>
     <div>Самозанятый</div>
   </footer>
-
 </div>
 
 </body>
