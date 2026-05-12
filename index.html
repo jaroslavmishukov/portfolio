@@ -228,6 +228,34 @@
     font-weight: 500;
   }
 
+  .case-screens {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .case-screen {
+    display: block;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: #fff;
+  }
+
+  .case-screen img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .case-screen figcaption {
+    padding: 12px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+    border-top: 1px solid var(--border);
+  }
+
   .card-link {
     font-size: 14px;
     font-weight: 600;
@@ -309,6 +337,20 @@
           <div class="case-point">Docker Compose, nginx, Let's Encrypt, backup/restore</div>
           <div class="case-point">Telegram-уведомления с быстрыми действиями</div>
           <div class="case-point">pytest-тесты бизнес-логики и деплоя</div>
+        </div>
+        <div class="case-screens" aria-label="Скриншоты проекта Озеро Гармония Чудес">
+          <figure class="case-screen">
+            <img src="assets/ozero/ozero-owner-dashboard.png" alt="Панель владельца со статистикой бронирований">
+            <figcaption>Панель владельца и статистика</figcaption>
+          </figure>
+          <figure class="case-screen">
+            <img src="assets/ozero/ozero-finance-report.png" alt="Финансовый отчет с бронированиями и поступлениями">
+            <figcaption>Финансы и Excel-отчеты</figcaption>
+          </figure>
+          <figure class="case-screen">
+            <img src="assets/ozero/ozero-admin-instructions.png" alt="Инструкции администратора внутри системы">
+            <figcaption>Инструкции для администраторов</figcaption>
+          </figure>
         </div>
       </div>
 
